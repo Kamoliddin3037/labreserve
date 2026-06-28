@@ -65,6 +65,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 }
 .login-btn:hover{filter:brightness(.93);transform:translateY(-1px)}
 
+
+#loginWrap::before,#loginWrap::after{content:'';position:absolute;border-radius:50%;filter:blur(6px);opacity:.72;animation:floaty 8s ease-in-out infinite}
+#loginWrap::before{width:360px;height:360px;left:8%;top:12%;background:radial-gradient(circle,#60a5fa 0%,rgba(96,165,250,.05) 68%,transparent 70%)}
+#loginWrap::after{width:280px;height:280px;right:10%;bottom:10%;background:radial-gradient(circle,#a78bfa 0%,rgba(167,139,250,.05) 68%,transparent 70%);animation-delay:-3s}
+@keyframes floaty{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(18px,-16px) scale(1.05)}}
+.login-box::before{content:'';position:absolute;inset:1px;border-radius:27px;background:linear-gradient(180deg,rgba(255,255,255,.18),transparent 45%);pointer-events:none}
+.login-box{overflow:hidden}
+.login-logo .ico{width:74px;height:74px;margin:0 auto 12px;border-radius:24px;background:rgba(255,255,255,.16);display:flex!important;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.25);box-shadow:inset 0 1px 0 rgba(255,255,255,.28)}
+.notify-btn{position:relative;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:.15s}
+.notify-btn:hover{background:rgba(255,255,255,.22);transform:translateY(-1px)}
+.notify-badge{position:absolute;top:-5px;right:-5px;min-width:19px;height:19px;padding:0 5px;background:#ef4444;color:white;border-radius:99px;font-size:11px;font-weight:900;display:none;align-items:center;justify-content:center;border:2px solid #1d4ed8}
+.device-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.device-card{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px;border:1px solid var(--bd);border-radius:var(--r);background:var(--sf);margin:8px 0}.device-name{font-weight:800}.muted{font-size:12px;color:var(--mu)}
+@media(max-width:640px){.device-grid{grid-template-columns:1fr}.notify-btn{width:34px;height:34px}}
+
 /* HEADER */
 header{
   background:linear-gradient(135deg,#1a3a6e,#2056b0,#3b82f6);
@@ -336,6 +350,97 @@ tbody tr:hover{background:var(--bll)}
   .tpill{display:none}
   .login-box{width:calc(100vw - 32px);padding:32px 24px}
 }
+
+/* REPORT PRINT */
+@media print{
+  body{background:#fff!important}
+  header,.tabs,#loginWrap,.modal,.hero,.krow,.dgrid,.qstats,.btn:not(.print-keep){display:none!important}
+  main{max-width:100%!important;padding:0!important}
+  .panel{display:none!important}
+  #p-rep{display:block!important}
+  #p-rep .card{box-shadow:none!important;border:none!important;border-radius:0!important;padding:0!important}
+  #p-rep .ch{border-bottom:2px solid #111!important}
+  #p-rep:before{
+    content:"LabReserve Ultra — Hisobot";
+    display:block;
+    font-size:22px;
+    font-weight:900;
+    margin-bottom:16px;
+  }
+  .tl .slot{break-inside:avoid;border:1px solid #ddd!important}
+}
+
+
+/* ===== STRONG RESPONSIVE MOBILE/TABLET FIX ===== */
+@media(max-width:900px){
+  header{padding:0 12px}
+  .hdr{height:auto;min-height:62px;padding:10px 0;flex-wrap:wrap}
+  .brand h1{font-size:15px}
+  .brand p{display:none}
+  .hdr-r{width:100%;justify-content:space-between;gap:6px;flex-wrap:wrap}
+  main{padding:14px 10px}
+  .tabs{
+    position:sticky;top:0;z-index:150;
+    display:grid;grid-template-columns:repeat(5,1fr);
+    gap:6px;border-radius:18px;padding:6px;
+    overflow:visible;
+  }
+  .tab{justify-content:center;padding:10px 6px;min-height:42px}
+  .tab .txt{display:none}
+  .hero,.dgrid,.fg{grid-template-columns:1fr!important}
+  .hkpis,.krow{grid-template-columns:repeat(2,1fr)!important}
+  .fbar,.fg2{grid-template-columns:1fr!important}
+  .card{padding:16px;border-radius:18px}
+  .ch{align-items:flex-start;gap:12px;flex-wrap:wrap}
+  .qstats{width:100%;display:grid;grid-template-columns:1fr 1fr}
+  .qstat{width:100%;min-width:0}
+  .bigtime{font-size:34px}
+  .hcard{padding:22px}
+  .hcard h2{font-size:20px}
+  .hkpi b,.kval{font-size:24px}
+  .clock{padding:18px}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  table{min-width:720px}
+  input,select,textarea{font-size:16px}
+}
+
+@media(max-width:560px){
+  body{font-size:13px}
+  .login-box{
+    width:calc(100vw - 24px)!important;
+    padding:28px 22px!important;
+    border-radius:24px!important;
+  }
+  .login-logo h2{font-size:20px}
+  .tabs{grid-template-columns:repeat(5,1fr);margin-bottom:12px}
+  .tab{padding:9px 4px;font-size:16px}
+  .tab span:first-child{font-size:18px}
+  .live-b{padding:5px 10px;font-size:12px}
+  .tpill{display:none!important}
+  .lbtn{padding:5px 9px;font-size:12px}
+  .uavatar{width:34px;height:34px}
+  .hkpis,.krow{grid-template-columns:1fr!important}
+  .kpi,.hkpi{padding:14px}
+  .ctitle{font-size:15px}
+  .ico{width:31px;height:31px}
+  .slot{
+    align-items:flex-start;
+    flex-direction:column;
+    gap:6px;
+  }
+  .acts{width:100%;justify-content:flex-start;flex-wrap:wrap}
+  .ibtn{width:38px;height:38px}
+  .cal,.cdlbl{grid-template-columns:repeat(2,1fr)!important}
+  .day{min-height:74px}
+  .qmodal{width:96vw;max-height:88vh}
+  .qmodal-head{padding:14px 16px}
+  .qmodal-title{font-size:17px}
+  .qtable-wrap{padding:12px}
+  .modal{padding:10px}
+  .mbox{padding:20px;border-radius:20px}
+  .bopt{align-items:flex-start;flex-direction:column;gap:10px}
+}
+
 </style>
 </head>
 <body>
@@ -384,6 +489,7 @@ tbody tr:hover{background:var(--bll)}
       </div>
     </div>
     <div class="hdr-r">
+      <button class="notify-btn" onclick="openAlerts()" title="Alert">🔔<span id="alertBell" class="notify-badge">0</span></button>
       <div class="live-b"><span class="dot"></span><span id="hlive">Jonli</span></div>
       <div class="tpill" id="htime">00:00:00</div>
       <!-- TIL -->
@@ -422,6 +528,7 @@ tbody tr:hover{background:var(--bll)}
   <button class="tab saonly" onclick="goTab('log',this)"><span>🧾</span><span class="txt" id="tb4">Audit log</span></button>
   <button class="tab saonly" onclick="goTab('sett',this)"><span>⚙️</span><span class="txt" id="tb5">Sozlamalar</span></button>
   <button class="tab saonly" onclick="goTab('users',this)"><span>👥</span><span class="txt" id="tb6">Foydalanuvchilar</span></button>
+  <button class="tab saonly" onclick="goTab('devices',this)"><span>🧪</span><span class="txt">Qurilmalar</span></button>
   <button class="tab saonly" onclick="goTab('bkup',this)"><span>💾</span><span class="txt" id="tb7">Backup</span></button>
   <button class="tab" onclick="goTab('ai',this)"><span>🧠</span><span class="txt" id="tb8">AI tavsiya</span></button>
   <button class="tab saonly" onclick="goTab('tg',this)"><span>🤖</span><span class="txt">Telegram</span></button>
@@ -535,10 +642,10 @@ tbody tr:hover{background:var(--bll)}
   <div class="card">
     <div class="ch"><div class="ctitle"><div class="ico">📄</div><span id="rh1">Hisobot</span></div></div>
     <div class="fg2" style="margin-bottom:10px">
-      <button class="btn bg" onclick="expCSV()" style="margin:0">📄 CSV</button>
-      <button class="btn bg" onclick="expJSON()" style="margin:0">📤 JSON</button>
+      <button class="btn bg" onclick="expCSV()" style="margin:0">📄 CSV yuklash</button>
+      <button class="btn bg" onclick="expJSON()" style="margin:0">📦 JSON backup</button>
     </div>
-    <button class="btn bpu" onclick="window.print()" style="margin:0 0 20px">🖨 PDF</button>
+    <button class="btn bpu" onclick="printReport()" style="margin:0 0 20px">🖨 PDF chiqarish</button>
     <div class="sep"></div>
     <div class="ctitle" style="margin-bottom:14px"><div class="ico" style="background:#f0fdf4">🕘</div><span id="rh2">Bugungi jadval</span></div>
     <div id="repTL" class="tl"></div>
@@ -575,6 +682,23 @@ tbody tr:hover{background:var(--bll)}
       <button class="btn bp bsm" style="width:auto;margin:0" onclick="openUM()">+ Qo'shish</button>
     </div>
     <div id="usersList"></div>
+  </div>
+</section>
+
+<!-- DEVICES -->
+<section id="p-devices" class="panel">
+  <div class="card">
+    <div class="ch">
+      <div class="ctitle"><div class="ico">🧪</div><span>Qurilmalar</span></div>
+      <button class="btn bp bsm" style="width:auto;margin:0" onclick="addDeviceUI()">+ Qurilma</button>
+    </div>
+    <div class="fg2">
+      <div><label>Qurilma nomi</label><input id="dName" placeholder="Masalan: UV–Vis"></div>
+      <div><label>Holat</label><select id="dStatus"><option value="active">🟢 Ishlayapti</option><option value="repair">🔴 Ta'mirda</option></select></div>
+    </div>
+    <div class="notice" id="dMsg"></div>
+    <div class="sep"></div>
+    <div id="devicesList"></div>
   </div>
 </section>
 
@@ -691,6 +815,9 @@ tbody tr:hover{background:var(--bll)}
     <div class="mtitle" id="mUtitle">👤 Foydalanuvchi</div>
     <label id="mul1">Ism familiya</label><input type="text" id="uName">
     <label id="mul2">Login</label><input type="text" id="uLogin" autocomplete="off">
+    <label>Telefon</label><input type="text" id="uPhone" placeholder="+998...">
+    <label>Telegram ID</label><input type="text" id="uTelegram" placeholder="7962349649">
+    <label>Status</label><select id="uActive"><option value="true">🟢 Faol</option><option value="false">🔴 Nofaol</option></select>
     <label id="mul3">Parol</label><input type="password" id="uPass" autocomplete="off">
     <label id="mul4">Rol</label>
     <select id="uRole">
@@ -971,7 +1098,10 @@ function normUser(u,i){
     name: String(u.name || u.fullName || u.fio || login || 'User').trim(),
     login,
     pass: normPass(u.pass || u.password || u.pwd || u.parol),
-    role: normRole(u.role)
+    role: normRole(u.role),
+    phone: String(u.phone || '').trim(),
+    telegramId: String(u.telegramId || u.tgId || '').trim(),
+    active: u.active !== false
   };
 }
 function safeGet(k){
@@ -1016,6 +1146,8 @@ function saveU(u){
   USER_CACHE=uniqUsers(u||[]);
   safeSet(UK,JSON.stringify(USER_CACHE));
   safeSet('lru_users',JSON.stringify(USER_CACHE));
+  refreshEmployeeNames();
+  pushUsersToFirebase(USER_CACHE);
   return USER_CACHE;
 }
 
@@ -1081,6 +1213,7 @@ function startApp(){
   fillSelects();
   renderTable();
   renderDash();
+  renderDevices();
   updateBkStats();
   if(clockTimer) clearInterval(clockTimer);
   tickClock();
@@ -1088,6 +1221,7 @@ function startApp(){
 }
 // Sahifa yuklanganda sessiyani tekshirish
 function bootApp(){
+  if(!localStorage.getItem(DK)) setDeviceLocal(DEFAULT_DEVICE_OBJECTS);
   initFirebaseSync();
   lang=localStorage.getItem('lru_lang')||'uz';
   applyLang();
@@ -1136,7 +1270,7 @@ function renderUsers(){
       <div class="uav" style="background:${cols[i%cols.length]};color:#fff">${u.name[0].toUpperCase()}</div>
       <div style="flex:1">
         <div style="font-weight:700;font-size:14px">${u.name}</div>
-        <div style="font-size:12px;color:var(--mu)">@${u.login} · ${u.role==='admin'?'👑 Admin':u.role==='moderator'?'✏️ Moderator':'👤 Foydalanuvchi'}</div>
+        <div style="font-size:12px;color:var(--mu)">@${u.login} · ${u.role==='admin'?'👑 Admin':u.role==='moderator'?'✏️ Moderator':'👤 Foydalanuvchi'} · ${u.active===false?'🔴 Nofaol':'🟢 Faol'}${u.telegramId?' · ID: '+u.telegramId:''}</div>
       </div>
       ${u.id!==currentUser.id
         ?`<button class="ibtn ip" onclick="openUM(${u.id})">✏️</button><button class="ibtn ir" onclick="delUser(${u.id})">🗑️</button>`
@@ -1151,9 +1285,13 @@ function openUM(id){
     document.getElementById('uName').value=u.name;
     document.getElementById('uLogin').value=u.login;
     document.getElementById('uPass').value='';
+    document.getElementById('uPhone').value=u.phone||'';
+    document.getElementById('uTelegram').value=u.telegramId||'';
+    document.getElementById('uActive').value=String(u.active!==false);
     document.getElementById('uRole').value=u.role;
   }else{
-    ['uName','uLogin','uPass'].forEach(i=>document.getElementById(i).value='');
+    ['uName','uLogin','uPass','uPhone','uTelegram'].forEach(i=>document.getElementById(i).value='');
+    document.getElementById('uActive').value='true';
     document.getElementById('uRole').value='moderator';
   }
   document.getElementById('uErr').style.display='none';
@@ -1165,6 +1303,9 @@ function saveUser(){
   const login=normLogin(document.getElementById('uLogin').value);
   const pass=normPass(document.getElementById('uPass').value);
   const role=document.getElementById('uRole').value;
+  const phone=document.getElementById('uPhone').value.trim();
+  const telegramId=document.getElementById('uTelegram').value.trim();
+  const active=document.getElementById('uActive').value==='true';
   const eEl=document.getElementById('uErr');
   if(!name||!login){eEl.textContent='❌ Ism va login majburiy';eEl.style.display='block';return;}
   if(!_eUID&&pass.length<4){eEl.textContent='❌ Parol kamida 4 belgi';eEl.style.display='block';return;}
@@ -1172,11 +1313,11 @@ function saveUser(){
   if(_eUID){
     const idx=users.findIndex(u=>u.id===_eUID);if(idx===-1)return;
     if(users.some((u,i)=>i!==idx&&u.login===login)){eEl.textContent='❌ Login band';eEl.style.display='block';return;}
-    users[idx].name=name;users[idx].login=login;users[idx].role=role;
+    users[idx].name=name;users[idx].login=login;users[idx].role=role;users[idx].phone=phone;users[idx].telegramId=telegramId;users[idx].active=active;
     if(pass.length>=4)users[idx].pass=pass;
   }else{
     if(users.some(u=>u.login===login)){eEl.textContent='❌ Login band';eEl.style.display='block';return;}
-    users.push({id:Date.now(),name,login,pass,role});
+    users.push({id:Date.now(),name,login,pass,role,phone,telegramId,active});
   }
   saveU(users);
   addLog(currentUser.name,_eUID?'TAHRIRLADI':"QO'SHDI",`${name} (@${login})`);
@@ -1191,6 +1332,47 @@ function delUser(id){
   saveU(users.filter(x=>x.id!==id));
   addLog(currentUser.name,"O'CHIRDI",`${u.name} (@${u.login})`);
   renderUsers();
+}
+
+
+// ===== DEVICES MGMT =====
+function renderDevices(){
+  const el=document.getElementById('devicesList');if(!el)return;
+  const list=getDeviceObjects();
+  el.innerHTML=list.map(d=>`
+    <div class="device-card">
+      <div><div class="device-name">${d.name}</div><div class="muted">${d.status==='repair'?'🔴 Taʼmirda':'🟢 Ishlayapti'} · Telegram bot shu ro‘yxatdan oladi</div></div>
+      <div class="acts">
+        <button class="ibtn ip" onclick="toggleDevice('${d.id}')">${d.status==='repair'?'🟢':'🔴'}</button>
+        <button class="ibtn ir" onclick="delDevice('${d.id}')">🗑️</button>
+      </div>
+    </div>`).join('') || `<div class="empty"><div class="eico">🧪</div><p>Qurilma yo‘q</p></div>`;
+}
+function addDeviceUI(){
+  const name=document.getElementById('dName').value.trim();
+  const status=document.getElementById('dStatus').value;
+  const msg=document.getElementById('dMsg');
+  if(!name){msg.textContent='❌ Qurilma nomini yozing';msg.className='notice nerr';msg.style.display='block';return;}
+  const list=getDeviceObjects();
+  const id=slug(name);
+  const idx=list.findIndex(d=>d.id===id||d.name.toLowerCase()===name.toLowerCase());
+  if(idx>=0){list[idx].name=name;list[idx].status=status;list[idx].active=true;} else list.push({id,name,status,active:true});
+  saveDevices(list);fillSelects();renderDevices();renderDash();
+  addLog(currentUser.name,'QURILMA',`${name} qo‘shildi/o‘zgartirildi`);
+  document.getElementById('dName').value='';
+  msg.textContent='✅ Saqlandi';msg.className='notice nok';msg.style.display='block';setTimeout(()=>msg.style.display='none',2500);
+}
+function toggleDevice(id){
+  const list=getDeviceObjects();const d=list.find(x=>x.id===id);if(!d)return;
+  d.status=d.status==='repair'?'active':'repair';d.active=true;
+  saveDevices(list);fillSelects();renderDevices();renderDash();
+  addLog(currentUser.name,'QURILMA HOLATI',`${d.name}: ${d.status}`);
+}
+function delDevice(id){
+  const list=getDeviceObjects();const d=list.find(x=>x.id===id);if(!d)return;
+  if(!confirm(`${d.name} o‘chirilsinmi?`))return;
+  saveDevices(list.filter(x=>x.id!==id));fillSelects();renderDevices();renderDash();
+  addLog(currentUser.name,'QURILMA OCHIRDI',d.name);
 }
 
 // ===== BACKUP =====
@@ -1240,6 +1422,25 @@ function initFirebaseSync(){
       FB_LOADING=false;
       try{renderTable();renderDash();renderCal();renderRepTL();updateQueueCounts();}catch(e){}
     });
+    FB_DB.ref('logs').on('value',snap=>{
+      const val=snap.val()||{};
+      const arr=Array.isArray(val)?val.filter(Boolean):Object.values(val).filter(Boolean);
+      localStorage.setItem(LK,JSON.stringify(arr.sort((a,b)=>(b.id||0)-(a.id||0))));
+      try{renderLogs();renderDash();updateAlertBell();}catch(e){}
+    });
+    FB_DB.ref('users').on('value',snap=>{
+      const val=snap.val()||{};
+      const arr=Object.entries(val).map(([id,u])=>({id: Number(u.id)||Number(id)||Date.now(), login:u.login||id, ...u, telegramId:u.telegramId||id}));
+      FB_LOADING=true; saveU(arr); FB_LOADING=false;
+      try{fillSelects();renderUsers();}catch(e){}
+    });
+    FB_DB.ref('devices').on('value',snap=>{
+      const val=snap.val()||{};
+      let arr=Object.entries(val).map(([id,d])=>({id,...d}));
+      if(!arr.length){arr=DEFAULT_DEVICE_OBJECTS;saveDevices(arr);return;}
+      FB_LOADING=true; setDeviceLocal(arr); FB_LOADING=false;
+      try{fillSelects();renderDevices();renderDash();}catch(e){}
+    });
   }catch(e){
     console.warn('Firebase ulanmagan:', e.message);
   }
@@ -1256,15 +1457,76 @@ function pushLogToFirebase(item){
   if(!FB_READY || !item) return;
   FB_DB.ref('logs/'+item.id).set(item).catch(e=>console.warn('Firebase log xatosi:',e.message));
 }
+function pushUsersToFirebase(arr){
+  if(!FB_READY || FB_LOADING) return;
+  const obj={};
+  (arr||[]).forEach(u=>{
+    const key=String(u.telegramId||u.login||u.id).trim();
+    if(key) obj[key]={...u, fullName:u.name, active:u.active!==false};
+  });
+  FB_DB.ref('users').update(obj).catch(e=>console.warn('Firebase user xatosi:',e.message));
+}
+function pushDevicesToFirebase(arr){
+  if(!FB_READY || FB_LOADING) return;
+  const obj={};
+  (arr||[]).forEach(d=>{const key=d.id||slug(d.name);obj[key]={name:d.name,status:d.status||'active',active:d.active!==false};});
+  FB_DB.ref('devices').set(obj).catch(e=>console.warn('Firebase device xatosi:',e.message));
+}
 
 // ===== CORE DATA =====
-const employees=['Fayruza','Dilnoza','Aziza','Madina','Kamoliddin','Javohir','Boshqa'];
-const devices=['Apparat-1','HPLC-1','HPLC-2','GC-MS','Spektrofotometr','Reaktor-1'];
+const DEFAULT_EMPLOYEES=['Fayruza','Dilnoza','Aziza','Madina','Kamoliddin','Javohir','Boshqa'];
+const DEFAULT_DEVICE_OBJECTS=[
+  {id:'uvvis',name:'UV–Vis',status:'active',active:true},
+  {id:'afm',name:'AFM',status:'active',active:true},
+  {id:'xrd',name:'XRD',status:'active',active:true},
+  {id:'sem',name:'SEM',status:'active',active:true},
+  {id:'dls',name:'DLS',status:'active',active:true},
+  {id:'ftir',name:'FTIR',status:'active',active:true},
+  {id:'asem',name:'ASEM',status:'active',active:true},
+  {id:'rheology',name:'Rheology',status:'active',active:true}
+];
+const DK='lru_devices_v2';
+let employees=[];
+let devices=[];
+function slug(v){return String(v||'').toLowerCase().replaceAll('–','').replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,'')||String(Date.now())}
+function getDeviceObjects(){try{return JSON.parse(localStorage.getItem(DK)||'null')||DEFAULT_DEVICE_OBJECTS.slice();}catch(e){return DEFAULT_DEVICE_OBJECTS.slice();}}
+function setDeviceLocal(arr){localStorage.setItem(DK,JSON.stringify(arr||[]));refreshDeviceNames();}
+function refreshDeviceNames(){devices=getDeviceObjects().filter(d=>d.active!==false&&d.status!=='repair').map(d=>d.name);}
+function saveDevices(arr){setDeviceLocal(arr);pushDevicesToFirebase(arr);}
+function refreshEmployeeNames(){
+  const names=getU().filter(u=>u.active!==false).map(u=>u.name).filter(Boolean);
+  employees=[...new Set([...names,...DEFAULT_EMPLOYEES])];
+}
+refreshDeviceNames();
+refreshEmployeeNames();
 function two(n){return String(n).padStart(2,'0')}
 function todayISO(){const d=new Date();return`${d.getFullYear()}-${two(d.getMonth()+1)}-${two(d.getDate())}`}
 function minT(t){const[h,m]=String(t).split(':').map(Number);return h*60+m}
 function validWorkTime(t){const m=minT(t);return /^\d{2}:\d{2}$/.test(String(t)) && m>=minT('07:00') && m<=minT('22:00')}
 function toTm(x){return`${two(Math.floor(x/60))}:${two(x%60)}`}
+function roundUp30(m){return Math.ceil(m/30)*30}
+function nextBookStartMin(){
+  const d=new Date();
+  return roundUp30(d.getHours()*60+d.getMinutes());
+}
+function setBookingSmartTime(){
+  const dt=document.getElementById('date'), s=document.getElementById('start'), e=document.getElementById('end');
+  if(!dt||!s||!e)return;
+  let date=dt.value||todayISO();
+  let startMin=minT('07:00');
+  if(date===todayISO()) startMin=Math.max(minT('07:00'),nextBookStartMin());
+  if(startMin+30>minT('22:00')){
+    const t=new Date();t.setDate(t.getDate()+1);
+    date=`${t.getFullYear()}-${two(t.getMonth()+1)}-${two(t.getDate())}`;
+    dt.value=date;
+    startMin=minT('07:00');
+  }
+  s.value=toTm(startMin);
+  e.value=toTm(startMin+30);
+}
+function isPastTodaySlot(date,start){
+  return date===todayISO() && minT(start)<Math.max(minT('07:00'),nextBookStartMin());
+}
 function getB(){return JSON.parse(localStorage.getItem(BK)||'[]')}
 function saveB(v){localStorage.setItem(BK,JSON.stringify(v));pushBookingsToFirebase(v)}
 function dateOnly(d){return new Date(d+'T00:00:00')}
@@ -1330,7 +1592,7 @@ function openQueueList(kind){
   document.getElementById('mQueue').classList.add('open');
 }
 function getLL(){return JSON.parse(localStorage.getItem(LK)||'[]')}
-function saveLL(v){localStorage.setItem(LK,JSON.stringify(v))}
+function saveLL(v){localStorage.setItem(LK,JSON.stringify(v));updateAlertBell();}
 function nowStr(){return new Date().toLocaleString('uz-UZ',{hour12:false})}
 function addLog(adm,act,det,bef='',aft=''){
   const l=getLL();
@@ -1349,6 +1611,8 @@ function showMsg(t,ok=true){
 
 // ===== FILL SELECTS =====
 function fillSelects(){
+  refreshEmployeeNames();
+  refreshDeviceNames();
   ['employee','femp','aiEmp'].forEach(id=>{
     const el=document.getElementById(id);if(!el)return;
     const cur=el.value;
@@ -1365,13 +1629,11 @@ function fillSelects(){
     devices.forEach(x=>el.add(new Option(x,x)));
     if(cur)el.value=cur;
   });
-  // Vaqt maydonlari: 07:00–22:00 oralig'i, qo'lda yozish mumkin
+  // Vaqt maydonlari: 30 daqiqalik slot. Bugun bo'lsa hozirgi vaqtdan keyingi slot chiqadi.
   setupTimeInputs();
-  const s=document.getElementById('start'),e=document.getElementById('end');
-  if(s&&!s.value)s.value='07:00';
-  if(e&&!e.value)e.value='22:00';
   const fd=document.getElementById('fdate');if(fd&&!fd.value)fd.value=todayISO();
   const dt=document.getElementById('date');if(dt&&!dt.value)dt.value=todayISO();
+  setBookingSmartTime();
   const ad=document.getElementById('aiDate');if(ad&&!ad.value)ad.value=todayISO();
   const aws=document.getElementById('aiWS');if(aws&&!aws.value)aws.value='07:00';
   const awe=document.getElementById('aiWE');if(awe&&!awe.value)awe.value='22:00';
@@ -1382,14 +1644,28 @@ function setupTimeInputs(){
     el.setAttribute('type','time');
     el.setAttribute('min','07:00');
     el.setAttribute('max','22:00');
-    el.setAttribute('step','300');
+    el.setAttribute('step','1800');
   });
+  const dt=document.getElementById('date');
+  if(dt && !dt.dataset.smartTimeBound){
+    dt.dataset.smartTimeBound='1';
+    dt.addEventListener('change',setBookingSmartTime);
+  }
+  const st=document.getElementById('start');
+  if(st && !st.dataset.smartEndBound){
+    st.dataset.smartEndBound='1';
+    st.addEventListener('change',()=>{
+      const e=document.getElementById('end');if(!e)return;
+      const end=Math.min(minT(st.value)+30,minT('22:00'));
+      e.value=toTm(end);
+    });
+  }
 }
 
 // ===== TABS =====
-const PANELS={dash:'p-dash',bron:'p-bron',cal:'p-cal',rep:'p-rep',log:'p-log',sett:'p-sett',users:'p-users',bkup:'p-bkup',ai:'p-ai',tg:'p-tg'};
+const PANELS={dash:'p-dash',bron:'p-bron',cal:'p-cal',rep:'p-rep',log:'p-log',sett:'p-sett',users:'p-users',devices:'p-devices',bkup:'p-bkup',ai:'p-ai',tg:'p-tg'};
 function goTab(id,btn){
-  const adminOnly=['log','sett','users','bkup','tg'];
+  const adminOnly=['log','sett','users','devices','bkup','tg'];
   if(adminOnly.includes(id) && (!currentUser || currentUser.role!=='admin')){
     id='dash';
     btn=document.querySelector('.tab[onclick*="dash"]');
@@ -1403,6 +1679,7 @@ function goTab(id,btn){
   if(id==='rep')renderRepTL();
   if(id==='dash')renderDash();
   if(id==='users')renderUsers();
+  if(id==='devices')renderDevices();
   if(id==='bkup')updateBkStats();
 }
 
@@ -1425,7 +1702,9 @@ function addBooking(){
   };
   if(!b.date)return showMsg("❌ Sana tanlang!",false);
   if(!validWorkTime(b.start)||!validWorkTime(b.end))return showMsg("❌ Vaqt 07:00 dan 22:00 gacha bo'lishi kerak.",false);
+  if(isPastTodaySlot(b.date,b.start))return showMsg("❌ Bugun o'tib ketgan vaqtga bron qilib bo'lmaydi. Keyingi bo'sh slotni tanlang.",false);
   if(minT(b.end)<=minT(b.start))return showMsg("❌ Tugash vaqti boshlanishdan keyin bolishi kerak.",false);
+  if(minT(b.end)-minT(b.start)!==30)return showMsg("❌ Bron oralig'i 30 daqiqa bo'lishi kerak.",false);
   const list=getB();
   if(hasConflict(list,b)){
     const bz=list.find(x=>x.date===b.date&&x.device===b.device&&x.status!=='rejected'
@@ -1532,6 +1811,20 @@ function renderLogs(){
     :`<div class="empty"><div class="eico">📜</div><p>${l.logEmpty}</p></div>`;
 }
 
+
+function updateAlertBell(){
+  const bell=document.getElementById('alertBell');if(!bell)return;
+  const last=Number(localStorage.getItem('lru_alert_seen')||0);
+  const cnt=getLL().filter(x=>Number(x.id||0)>last).length;
+  bell.textContent=cnt>99?'99+':cnt;
+  bell.style.display=cnt?'flex':'none';
+}
+function openAlerts(){
+  goTab('log',document.querySelector('.tab[onclick*="log"]'));
+  const logs=getLL(); if(logs[0]) localStorage.setItem('lru_alert_seen',String(logs[0].id||Date.now()));
+  updateAlertBell();
+}
+
 // ===== CALENDAR =====
 let calD=new Date();
 function renderCal(){
@@ -1563,6 +1856,15 @@ function expJSON(){
   a.download=`labreserve_${todayISO()}.json`;a.click();
   addLog(currentUser.name,'JSON EXPORT','Backup yuklab olindi');
 }
+function printReport(){
+  const oldTitle = document.title;
+  document.title = "LabReserve Ultra — Hisobot";
+  setTimeout(()=>{
+    window.print();
+    document.title = oldTitle;
+  },100);
+}
+
 function expCSV(){
   const rows=[['Sana','Boshlanish','Tugash','Xodim','Apparat','Status','Reaksiya','Izoh'],
     ...getB().map(x=>[x.date,x.start,x.end,x.employee,x.device,x.status,x.reaction||'',x.note||''])];
